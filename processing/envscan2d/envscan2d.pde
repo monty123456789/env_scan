@@ -43,7 +43,7 @@ void draw()
 // in arduino, when each rotation is complete '1000.9' is serial printed, and so if processing receives
 // that number, it clears the data from coList, which is the list that the second coordinates are stored 
 ////in so as to cnnect the graph. 
-  if (va == 1000.9) {
+  if (va == 1000.9 || coList.size() > 90) {
     coList.clear();
   }
   
@@ -60,9 +60,9 @@ void draw()
   count += width/90;
   
   // doubles the size of the cooordinates to make the shape more pronounced. 
-  Float vat = va*2;
+  Float vat = va/5;
   
-  Float vas = map(va, 15, 80, 255, 0);
+  Float vas = map(va, 15, 200, 255, 150);
   print(vas + "a    ");
   
   //resets the x coordinate to 0 every time the servo finishes a loop. 
@@ -92,14 +92,14 @@ void draw()
 
       
       line(count2, xcor2, count, xcor);
-      stroke(vas,0,255-vas);
+      stroke(vas);
 
       //if (vat > 0) {
         //pg.beginDraw();
        // clear();
         //line(320, 480, count, xcor);
        // pg.endDraw();
-       saveFrame("2d_38.jpg");
+       saveFrame("2d_3.jpg");
   
   }
   
