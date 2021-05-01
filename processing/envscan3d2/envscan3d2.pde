@@ -16,6 +16,8 @@ int newLine = 0;
 int index = 0;
 int index2 = 0;
 
+int rotation = 180;
+
 Float z = 0.0;
 
 float xcor;
@@ -43,7 +45,8 @@ void setup()
 
 void draw() {
 
-  directionalLight(vas, vas, vas, 0, -1, 0);
+  //directionalLight(vas, vas, vas, 0, -10, 0);
+ lights();
 
   //reads the data from arduino, stores as a string to 'val'
   val = myPort.readStringUntil('\n');
@@ -66,31 +69,33 @@ void draw() {
     //resets the x coordinate to 0 every time the servo finishes a loop. 
     // x is removed from the y coordinate with every loop, so each new line is plotted on a new level. 
 
-    if (va == 1000.9 || coList.size() > 90 ) { //|| coList.size() > 90
+    if (va == 1000.9 || coList.size() > rotation-9 ) { //|| coList.size() > 90
       coList.clear();
       newLine +=1;
       count = 0.0;
-      x += height/45;
+      x += height/rotation;
+      //x += va;
     }
 
     // count is assigned to the x coordinate so with each new plot points, the coordinate moves across
     // the screen. 
-    count += width/45;
-    count2 = count - width/45;
-    x2 = x-(height/45);
+    count += width/rotation;
+    println(x);
+    count2 = count - width/rotation;
+    x2 = x-(height/rotation);
 
 
     //maps distance coordiantes to rgb values
     vas = map(va, 25, 40, 255, 50);
 
     //makes shape is more pronounced.
-    vat = map(va, 25, 44, va, va*3);
+    vat = va; //map(va, 25, 44, va, va*3);
 
     lines();
     //fill(vas);
     //circle(count, xcor, 7);
 
-    saveFrame("3d_c30.jpg");
+    saveFrame("3d_c43.jpg");
   }
 }
 
@@ -102,11 +107,11 @@ void draw() {
 
 
 void spheres() {
-  //camera(5, 500, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
-  fill(255);
+  camera(5, 500, (height/2) / tan(PI/6), width/2, height/2, 0, 0, 1, 0);
+  fill(vas);
   noStroke();
-  translate(count, x, -vat);
-  sphere(5);
+  translate(count, x, -(vat));
+  sphere(2);
 }
 
 
@@ -122,7 +127,7 @@ void lines() {
    index = coList.size();
 
     stroke(vas);
-    strokeWeight(5);
+    strokeWeight(1);
     last = coList.get((index - 2)); 
     first = coList.get((index-1));
     print(count + "  " + count2 + "b  ");
