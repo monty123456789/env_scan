@@ -5,7 +5,7 @@ class Co {
   float noiz, noiz2, noiz3, noiz4, noiz2z, noiz3z, x;
   
   Co(float x, float y, float z) {
-    
+    //s
    
    position = new PVector(x, y, z);
   

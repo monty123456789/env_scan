@@ -2,7 +2,7 @@ import processing.serial.*;
 
 ArrayList<Co> cos = new ArrayList<Co>();
 
-Serial myPort;  // Create object from Serial class
+Serial myPort;  // Create object from Serial class ss
 PGraphics pg;
 
 String val;
@@ -173,7 +173,6 @@ void wave() {
       //println(x, 12);
       if (x > (height/rotation)*10) {
         m.nois();
-        portName = Serial.list()[3]; 
        // n.nois();
       }
       //pushMatrix();
